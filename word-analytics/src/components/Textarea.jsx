@@ -1,0 +1,36 @@
+import { useState } from "react";
+import Warning from "./Warning";
+
+const Textarea = () => {
+  const [text, setText] = useState("");
+  const [warning, setWarning] = useState(false);
+
+  console.log(text);
+
+  const handleChange = (e) => {
+    // extract text from event (controlled input)
+    let newText = e.target.value;
+
+    if (newText.includes("<script>")) {
+      // alert("No script tag allowed!");
+      setWarning(true);
+      newText = newText.replace("<script>", "");
+    }
+
+    setText(newText);
+  };
+
+  return (
+    <section className="textarea">
+      <textarea
+        spellCheck="false"
+        placeholder="Enter your text"
+        onChange={handleChange}
+        value={text}
+      ></textarea>
+      {warning && <Warning />}
+    </section>
+  );
+};
+
+export default Textarea;
