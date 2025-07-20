@@ -1,8 +1,10 @@
+import Card from "./components/Card";
+
 function App() {
   return (
-    <>
-      <p>Hello world</p>
-    </>
+    <main>
+      <Card />
+    </main>
   );
 }
 
