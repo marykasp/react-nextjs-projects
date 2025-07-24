@@ -22,13 +22,22 @@ function App() {
     setItems([]);
   };
 
+  // reset items to initial values
+  const handleResetToInitial = () => {
+    setItems(initialItems);
+  };
+
   return (
     <>
       <BackgroundHeading />
       <main>
         <Header />
         <ItemList items={items} />
-        <Sidebar addItem={handleAddItem} removeItems={handleRemoveAllItems} />
+        <Sidebar
+          addItem={handleAddItem}
+          removeItems={handleRemoveAllItems}
+          resetItems={handleResetToInitial}
+        />
       </main>
 
       <Footer />
