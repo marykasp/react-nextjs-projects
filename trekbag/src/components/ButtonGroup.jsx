@@ -6,20 +6,35 @@ const ButtonGroup = ({
   markItemsComplete,
   markItemsIncomplete,
 }) => {
+  const secondaryButtons = [
+    {
+      text: "Mark all as complete",
+      onClick: markItemsComplete,
+    },
+    {
+      text: "Mark all as incomplete",
+      onClick: markItemsIncomplete,
+    },
+    {
+      text: "Reset",
+      onClick: resetItems,
+    },
+    {
+      text: "Remove all items",
+      onClick: removeItems,
+    },
+  ];
   return (
     <div className="button-group">
-      <Button buttonType="secondary" onClick={markItemsComplete}>
-        Mark all as complete
-      </Button>
-      <Button buttonType="secondary" onClick={markItemsIncomplete}>
-        Mark all as incomplete
-      </Button>
-      <Button buttonType="secondary" onClick={resetItems}>
-        Reset
-      </Button>
-      <Button buttonType="secondary" onClick={removeItems}>
-        Remove all items
-      </Button>
+      {secondaryButtons.map((button) => (
+        <Button
+          onClick={button.onClick}
+          buttonType="secondary"
+          key={button.text}
+        >
+          {button.text}
+        </Button>
+      ))}
     </div>
   );
 };
