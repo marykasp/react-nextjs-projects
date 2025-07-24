@@ -12,12 +12,12 @@ const Textarea = () => {
     // extract text from event (controlled input)
     let newText = e.target.value;
 
+    // basic validation
     if (newText.includes("<script>")) {
       setWarningText("No script tag allowed");
       setWarning(true);
       newText = newText.replace("<script>", "");
     } else {
-      setWarning(false);
       setWarningText("");
     }
 
