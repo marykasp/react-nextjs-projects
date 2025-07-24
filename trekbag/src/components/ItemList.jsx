@@ -1,15 +1,15 @@
-const ItemList = ({ items }) => {
+const ItemList = ({ items, deleteItem }) => {
   return (
     <ul className="item-list">
       {/* iterate over todo items to display a list item */}
       {items.map((item) => (
-        <Item key={item.id} item={item} />
+        <Item key={item.id} item={item} deleteItem={deleteItem} />
       ))}
     </ul>
   );
 };
 
-const Item = ({ item }) => {
+const Item = ({ item, deleteItem }) => {
   return (
     <li className="item">
       <label>
@@ -17,7 +17,7 @@ const Item = ({ item }) => {
         {item.name}
       </label>
 
-      <button>❌</button>
+      <button onClick={() => deleteItem(item.id)}>❌</button>
     </li>
   );
 };
