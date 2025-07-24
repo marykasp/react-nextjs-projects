@@ -4,6 +4,7 @@ import Warning from "./Warning";
 const Textarea = () => {
   const [text, setText] = useState("");
   const [warning, setWarning] = useState(false);
+  const [warningText, setWarningText] = useState("");
 
   console.log(text);
 
@@ -12,9 +13,12 @@ const Textarea = () => {
     let newText = e.target.value;
 
     if (newText.includes("<script>")) {
-      // alert("No script tag allowed!");
+      setWarningText("No script tag allowed");
       setWarning(true);
       newText = newText.replace("<script>", "");
+    } else {
+      setWarning(false);
+      setWarningText("");
     }
 
     setText(newText);
@@ -28,7 +32,7 @@ const Textarea = () => {
         onChange={handleChange}
         value={text}
       ></textarea>
-      {warning && <Warning />}
+      {warning && <Warning warningText={warningText} />}
     </section>
   );
 };

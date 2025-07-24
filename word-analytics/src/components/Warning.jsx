@@ -1,5 +1,5 @@
-const Warning = () => {
-  return <span>No script tag allowed</span>;
+const Warning = ({ warningText }) => {
+  return <span className="warning">{warningText}</span>;
 };
 
 export default Warning;
