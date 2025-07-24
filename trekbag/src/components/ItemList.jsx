@@ -1,9 +1,4 @@
-import { useState } from "react";
-import { initialItems } from "../lib/constants";
-
-const ItemList = () => {
-  const [items, setItems] = useState(initialItems);
-
+const ItemList = ({ items }) => {
   return (
     <ul className="item-list">
       {/* iterate over todo items to display a list item */}
