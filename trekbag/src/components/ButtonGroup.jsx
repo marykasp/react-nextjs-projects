@@ -1,12 +1,20 @@
 import Button from "./Button";
 
+const secondaryButtons = [
+  "Mark all as complete",
+  "Mark all as incomplete",
+  "Reset",
+  "Remove all items",
+];
+
 const ButtonGroup = () => {
   return (
     <div className="button-group">
-      <Button type="secondary">Mark all as complete</Button>
-      <Button type="secondary">Mark all as complete</Button>
-      <Button type="secondary">Reset</Button>
-      <Button type="secondary">Remove all items</Button>
+      {secondaryButtons.map((buttonText) => (
+        <Button type="secondary" key={buttonText}>
+          {buttonText}
+        </Button>
+      ))}
     </div>
   );
 };
