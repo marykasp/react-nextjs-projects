@@ -1,12 +1,19 @@
 import Button from "./Button";
 
-const ButtonGroup = ({ removeItems, resetItems, markItemsComplete }) => {
+const ButtonGroup = ({
+  removeItems,
+  resetItems,
+  markItemsComplete,
+  markItemsIncomplete,
+}) => {
   return (
     <div className="button-group">
       <Button buttonType="secondary" onClick={markItemsComplete}>
         Mark all as complete
       </Button>
-      <Button buttonType="secondary">Mark all as incomplete</Button>
+      <Button buttonType="secondary" onClick={markItemsIncomplete}>
+        Mark all as incomplete
+      </Button>
       <Button buttonType="secondary" onClick={resetItems}>
         Reset
       </Button>

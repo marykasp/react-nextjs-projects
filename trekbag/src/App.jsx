@@ -36,13 +36,13 @@ function App() {
     setItems(newItems);
   };
 
-  // const handleMarkAllAsIncomplete = () => {
-  //   const newItems = items.map((item) => {
-  //     return { ...item, packed: false };
-  //   });
+  const handleMarkAllAsIncomplete = () => {
+    const newItems = items.map((item) => {
+      return { ...item, packed: false };
+    });
 
-  //   setItems(newItems);
-  // };
+    setItems(newItems);
+  };
 
   return (
     <>
@@ -55,6 +55,7 @@ function App() {
           removeItems={handleRemoveAllItems}
           resetItems={handleResetToInitial}
           markItemsComplete={handleMarkAllAsComplete}
+          markItemsIncomplete={handleMarkAllAsIncomplete}
         />
       </main>
 
