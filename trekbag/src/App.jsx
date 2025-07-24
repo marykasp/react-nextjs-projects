@@ -27,6 +27,23 @@ function App() {
     setItems(initialItems);
   };
 
+  // iterate over all items and change the packed property to true to have checkbox be marked as complete
+  const handleMarkAllAsComplete = () => {
+    const newItems = items.map((item) => {
+      return { ...item, packed: true };
+    });
+
+    setItems(newItems);
+  };
+
+  // const handleMarkAllAsIncomplete = () => {
+  //   const newItems = items.map((item) => {
+  //     return { ...item, packed: false };
+  //   });
+
+  //   setItems(newItems);
+  // };
+
   return (
     <>
       <BackgroundHeading />
@@ -37,6 +54,7 @@ function App() {
           addItem={handleAddItem}
           removeItems={handleRemoveAllItems}
           resetItems={handleResetToInitial}
+          markItemsComplete={handleMarkAllAsComplete}
         />
       </main>
 
