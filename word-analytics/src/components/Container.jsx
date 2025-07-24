@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   INSTAGRAM_MAX_CHARACTERS,
   FACEBOOK_MAX_CHARACTERS,
-} from "../constants";
+} from "../lib/constants";
 
 const Container = () => {
   const [text, setText] = useState("");
