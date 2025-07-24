@@ -1,10 +1,10 @@
 import AddItemForm from "./AddItemForm";
 import ButtonGroup from "./ButtonGroup";
 
-const Sidebar = ({ setItems }) => {
+const Sidebar = ({ addItem }) => {
   return (
     <div className="sidebar">
-      <AddItemForm setItems={setItems} />
+      <AddItemForm addItem={addItem} />
       <ButtonGroup />
     </div>
   );

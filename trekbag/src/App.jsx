@@ -9,13 +9,21 @@ import { initialItems } from "./lib/constants";
 function App() {
   const [items, setItems] = useState(initialItems);
 
+  // add new item to end of items list - separate implementation logic from event, just pass item name to parent to then create object
+  const handleAddItem = (itemText) => {
+    setItems((prevItems) => [
+      ...prevItems,
+      { id: new Date().getTime(), name: itemText, packed: false },
+    ]);
+  };
+
   return (
     <>
       <BackgroundHeading />
       <main>
         <Header />
         <ItemList items={items} />
-        <Sidebar setItems={setItems} />
+        <Sidebar addItem={handleAddItem} />
       </main>
 
       <Footer />

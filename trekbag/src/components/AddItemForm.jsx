@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { useState, useRef } from "react";
 
-const AddItemForm = ({ setItems }) => {
+const AddItemForm = ({ addItem }) => {
   const [itemText, setItemText] = useState("");
   const inputRef = useRef();
 
@@ -11,18 +11,16 @@ const AddItemForm = ({ setItems }) => {
 
     // validate input data
     if (!itemText) {
+      // TODO: add toast notification for validation warning
       alert("Item can't be empty");
       inputRef.current.focus();
       return;
     }
-    // add item name to items state OR can pass setItems to this form component and update item here
-    const newItem = {
-      id: new Date().getTime(),
-      name: itemText,
-      packed: false,
-    };
 
-    setItems((prevItems) => [...prevItems, newItem]);
+    // create a new item object with the item name retrieved from the input and stored in state
+
+    // pass new item object to function on parent which will use state update function to update the state
+    addItem(itemText);
     setItemText("");
   };
 
