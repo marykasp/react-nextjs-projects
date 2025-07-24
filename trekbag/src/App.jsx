@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import BackgroundHeading from "./components/BackgroundHeading";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -8,24 +8,6 @@ import { initialItems } from "./lib/constants";
 
 function App() {
   const [items, setItems] = useState(initialItems);
-  const inputRef = useRef();
-
-  // pass name of new item to then add to end of items list array
-  const addItem = (newItem) => {
-    // basic validation
-    if (!newItem) {
-      alert("Item name can' be empty");
-      // refocus input after display of alert window
-      inputRef.current.focus();
-      return;
-    }
-
-    // use current time to create a new unique ID
-    setItems((prevItems) => [
-      ...prevItems,
-      { id: new Date().getTime(), name: newItem, packed: false },
-    ]);
-  };
 
   return (
     <>
@@ -33,7 +15,7 @@ function App() {
       <main>
         <Header />
         <ItemList items={items} />
-        <Sidebar addItem={addItem} inputRef={inputRef} />
+        <Sidebar setItems={setItems} />
       </main>
 
       <Footer />
