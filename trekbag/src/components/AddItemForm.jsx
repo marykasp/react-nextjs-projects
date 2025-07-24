@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { useState } from "react";
 
-const AddItemForm = ({ addItem }) => {
+const AddItemForm = ({ addItem, inputRef }) => {
   const [itemText, setItemText] = useState("");
 
   const handleSubmit = (e) => {
@@ -23,6 +23,8 @@ const AddItemForm = ({ addItem }) => {
         placeholder="toothbrush..."
         value={itemText}
         onChange={handleChange}
+        autoFocus={true}
+        ref={inputRef}
       />
       <Button>Add to list</Button>
     </form>
