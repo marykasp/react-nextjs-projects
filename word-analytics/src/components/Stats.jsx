@@ -1,12 +1,10 @@
-const Stats = ({ text }) => {
-  const numberofCharacters = text.length;
-
+const Stats = ({ statDetails }) => {
   return (
     <section className="stats">
-      <Stat number={0} label="Words" />
-      <Stat number={numberofCharacters} label="Characters" />
-      <Stat number={280} label="Instagram" />
-      <Stat number={2200} label="Facebook" />
+      <Stat number={statDetails.numberOfWords} label="Words" />
+      <Stat number={statDetails.numberOfCharacters} label="Characters" />
+      <Stat number={statDetails.instagramCharactersLeft} label="Instagram" />
+      <Stat number={statDetails.facebookCharactersLeft} label="Facebook" />
     </section>
   );
 };
