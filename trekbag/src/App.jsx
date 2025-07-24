@@ -17,9 +17,25 @@ function App() {
     ]);
   };
 
+  // delete specified item with ID from items list
   const handleDeleteItem = (id) => {
     console.log(`Deleting item with id: ${id}`);
     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  const handleToggleItem = (id) => {
+    // use map method to edit one property on an array of objects
+    const newItems = items.map((item) => {
+      // find item in array with id
+      if (item.id === id) {
+        // override packed property on the item with the id passed in
+        return { ...item, packed: !item.packed };
+      }
+
+      return item;
+    });
+
+    setItems(newItems);
   };
 
   // remove all items from list
@@ -54,7 +70,11 @@ function App() {
       <BackgroundHeading />
       <main>
         <Header />
-        <ItemList items={items} deleteItem={handleDeleteItem} />
+        <ItemList
+          items={items}
+          deleteItem={handleDeleteItem}
+          toggleItem={handleToggleItem}
+        />
         <Sidebar
           addItem={handleAddItem}
           removeItems={handleRemoveAllItems}
