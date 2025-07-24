@@ -1,12 +1,9 @@
 import { useState } from "react";
 import Warning from "./Warning";
 
-const Textarea = () => {
-  const [text, setText] = useState("");
-  const [warning, setWarning] = useState(false);
+const Textarea = ({ text, setText }) => {
+  // const [warning, setWarning] = useState(false);
   const [warningText, setWarningText] = useState("");
-
-  console.log(text);
 
   const handleChange = (e) => {
     // extract text from event (controlled input)
@@ -15,7 +12,6 @@ const Textarea = () => {
     // basic validation
     if (newText.includes("<script>")) {
       setWarningText("No script tag allowed");
-      setWarning(true);
       newText = newText.replace("<script>", "");
     } else {
       setWarningText("");
@@ -32,7 +28,7 @@ const Textarea = () => {
         onChange={handleChange}
         value={text}
       ></textarea>
-      {warning && <Warning warningText={warningText} />}
+      {warningText && <Warning warningText={warningText} />}
     </section>
   );
 };
