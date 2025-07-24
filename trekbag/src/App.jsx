@@ -17,13 +17,18 @@ function App() {
     ]);
   };
 
+  // remove all items from list
+  const handleRemoveAllItems = () => {
+    setItems([]);
+  };
+
   return (
     <>
       <BackgroundHeading />
       <main>
         <Header />
         <ItemList items={items} />
-        <Sidebar addItem={handleAddItem} />
+        <Sidebar addItem={handleAddItem} removeItems={handleRemoveAllItems} />
       </main>
 
       <Footer />

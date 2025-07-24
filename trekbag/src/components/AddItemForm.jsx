@@ -17,9 +17,7 @@ const AddItemForm = ({ addItem }) => {
       return;
     }
 
-    // create a new item object with the item name retrieved from the input and stored in state
-
-    // pass new item object to function on parent which will use state update function to update the state
+    // pass new item name to function on parent which will use state update function to update the state
     addItem(itemText);
     setItemText("");
   };
