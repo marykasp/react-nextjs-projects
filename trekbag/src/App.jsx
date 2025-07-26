@@ -8,6 +8,7 @@ import { initialItems } from "./lib/constants";
 
 function App() {
   // check first localStorage to see if there are items if not use initialItems
+  // passing a function to use useState will ensure it only runs on first render
   const [items, setItems] = useState(() => {
     return JSON.parse(localStorage.getItem("items")) || initialItems;
   });

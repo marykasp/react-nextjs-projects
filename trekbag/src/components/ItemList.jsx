@@ -1,6 +1,6 @@
 import EmptyView from "./EmptyView";
 import Select from "react-select";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const options = [
   { value: "default", label: "Sort by default" },
@@ -10,19 +10,24 @@ const options = [
 const ItemList = ({ items, onDeleteItem, onToggleItem }) => {
   const [sortBy, setSortBy] = useState("default");
 
-  const sortedItems = [...items].sort((a, b) => {
-    // return a negative or positive number - if postive a will become before b
-    if (sortBy === "packed") {
-      return b.packed - a.packed;
-    }
+  // does not get called on every re-render only when items and sortBy are updated
+  const sortedItems = useMemo(
+    () =>
+      [...items].sort((a, b) => {
+        // return a negative or positive number - if postive a will become before b
+        if (sortBy === "packed") {
+          return b.packed - a.packed;
+        }
 
-    if (sortBy === "unpacked") {
-      return a.packed - b.packed;
-    }
+        if (sortBy === "unpacked") {
+          return a.packed - b.packed;
+        }
 
-    // default sorting - does not change the order of the list
-    return;
-  });
+        // default sorting - does not change the order of the list
+        return;
+      }),
+    [items, sortBy],
+  );
 
   return (
     <ul className="item-list">
