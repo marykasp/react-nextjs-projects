@@ -1,7 +1,9 @@
+import EmptyView from "./EmptyView";
+
 const ItemList = ({ items, onDeleteItem, onToggleItem }) => {
   return (
     <ul className="item-list">
-      {items.length === 0 && <div>Empty</div>}
+      {items.length === 0 && <EmptyView />}
       {/* iterate over todo items to display a list item */}
       {items.map((item) => (
         <Item
