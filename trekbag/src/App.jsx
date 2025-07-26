@@ -72,13 +72,13 @@ function App() {
         <Header />
         <ItemList
           items={items}
-          deleteItem={handleDeleteItem}
-          toggleItem={handleToggleItem}
+          onDeleteItem={handleDeleteItem}
+          onToggleItem={handleToggleItem}
         />
         <Sidebar
-          addItem={handleAddItem}
-          removeItems={handleRemoveAllItems}
-          resetItems={handleResetToInitial}
+          onAddItem={handleAddItem}
+          onRemoveItems={handleRemoveAllItems}
+          onResetItems={handleResetToInitial}
           markItemsComplete={handleMarkAllAsComplete}
           markItemsIncomplete={handleMarkAllAsIncomplete}
         />

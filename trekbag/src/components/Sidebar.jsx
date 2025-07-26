@@ -2,18 +2,18 @@ import AddItemForm from "./AddItemForm";
 import ButtonGroup from "./ButtonGroup";
 
 const Sidebar = ({
-  addItem,
-  removeItems,
-  resetItems,
+  onAddItem,
+  onRemoveItems,
+  onResetItems,
   markItemsComplete,
   markItemsIncomplete,
 }) => {
   return (
     <div className="sidebar">
-      <AddItemForm addItem={addItem} />
+      <AddItemForm addItem={onAddItem} />
       <ButtonGroup
-        removeItems={removeItems}
-        resetItems={resetItems}
+        removeItems={onRemoveItems}
+        resetItems={onResetItems}
         markItemsComplete={markItemsComplete}
         markItemsIncomplete={markItemsIncomplete}
       />

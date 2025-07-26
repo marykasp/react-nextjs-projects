@@ -1,13 +1,14 @@
-const ItemList = ({ items, deleteItem, toggleItem }) => {
+const ItemList = ({ items, onDeleteItem, onToggleItem }) => {
   return (
     <ul className="item-list">
+      {items.length === 0 && <div>Empty</div>}
       {/* iterate over todo items to display a list item */}
       {items.map((item) => (
         <Item
           key={item.id}
           item={item}
-          deleteItem={deleteItem}
-          toggleItem={toggleItem}
+          deleteItem={onDeleteItem}
+          toggleItem={onToggleItem}
         />
       ))}
     </ul>
