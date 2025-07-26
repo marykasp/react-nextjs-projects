@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import BackgroundHeading from "./components/BackgroundHeading";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Logo from "./components/Logo";
+import Counter from "./components/Counter";
 import ItemList from "./components/ItemList";
 import Sidebar from "./components/Sidebar";
 import { initialItems } from "./lib/constants";
@@ -78,10 +80,13 @@ function App() {
     <>
       <BackgroundHeading />
       <main>
-        <Header
-          totalNumberOfItems={items.length}
-          numberItemsPacked={items.filter((item) => item.packed).length}
-        />
+        <Header>
+          <Logo />
+          <Counter
+            totalNumberOfItems={items.length}
+            numberItemsPacked={items.filter((item) => item.packed).length}
+          />
+        </Header>
 
         <ItemList
           items={items}
