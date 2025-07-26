@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BackgroundHeading from "./components/BackgroundHeading";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -7,7 +7,10 @@ import Sidebar from "./components/Sidebar";
 import { initialItems } from "./lib/constants";
 
 function App() {
-  const [items, setItems] = useState(initialItems);
+  // check first localStorage to see if there are items if not use initialItems
+  const [items, setItems] = useState(() => {
+    return JSON.parse(localStorage.getItem("items")) || initialItems;
+  });
 
   // add new item to end of items list - separate implementation logic from event, just pass item name to parent to then create object
   const handleAddItem = (itemText) => {
@@ -64,6 +67,11 @@ function App() {
 
     setItems(newItems);
   };
+
+  useEffect(() => {
+    // when component first renders and everytime items list is updated - update the items on localStorage
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
 
   return (
     <>
