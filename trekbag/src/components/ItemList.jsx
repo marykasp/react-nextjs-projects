@@ -1,5 +1,6 @@
 import EmptyView from "./EmptyView";
 import Select from "react-select";
+import { useItemsContext } from "../lib/hooks";
 import { useMemo, useState } from "react";
 
 const options = [
@@ -7,8 +8,10 @@ const options = [
   { value: "packed", label: "Sort by packed" },
   { value: "unpacked", label: "Sort by unpacked" },
 ];
-const ItemList = ({ items, onDeleteItem, onToggleItem }) => {
+const ItemList = () => {
   const [sortBy, setSortBy] = useState("default");
+  // consume context
+  const { items, handleDeleteItem, handleToggleItem } = useItemsContext();
 
   // does not get called on every re-render only when items and sortBy are updated
   const sortedItems = useMemo(
@@ -46,8 +49,8 @@ const ItemList = ({ items, onDeleteItem, onToggleItem }) => {
         <Item
           key={item.id}
           item={item}
-          deleteItem={onDeleteItem}
-          toggleItem={onToggleItem}
+          deleteItem={handleDeleteItem}
+          toggleItem={handleToggleItem}
         />
       ))}
     </ul>

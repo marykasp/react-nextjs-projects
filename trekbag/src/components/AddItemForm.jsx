@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { useState, useRef } from "react";
 
-const AddItemForm = ({ addItem }) => {
+const AddItemForm = ({ onAddItem }) => {
   const [itemText, setItemText] = useState("");
   const inputRef = useRef();
 
@@ -18,7 +18,7 @@ const AddItemForm = ({ addItem }) => {
     }
 
     // pass new item name to function on parent which will use state update function to update the state
-    addItem(itemText);
+    onAddItem(itemText);
     setItemText("");
   };
 
