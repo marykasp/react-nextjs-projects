@@ -2,10 +2,10 @@ import { TriangleUpIcon } from "@radix-ui/react-icons";
 
 type FeedbackItem = {
   upvoteCount: number;
-  companyLetter: string;
-  companyName: string;
+  badgeLetter: string;
+  company: string;
   text: string;
-  days: number;
+  daysAgo: number;
 };
 
 // for props object
@@ -21,15 +21,15 @@ const FeedbackItem = ({ feedbackItem }: FeedbackItemProps) => {
 
       {/* logo square */}
       <div>
-        <p>{feedbackItem.companyLetter}</p>
+        <p>{feedbackItem.badgeLetter}</p>
       </div>
 
       <div>
-        <p>{feedbackItem.companyName}</p>
+        <p>{feedbackItem.company}</p>
         <p>{feedbackItem.text}</p>
       </div>
 
-      <p>4d</p>
+      <p>{feedbackItem.daysAgo}d</p>
     </li>
   );
 };
