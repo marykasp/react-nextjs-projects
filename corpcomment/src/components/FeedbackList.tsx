@@ -9,28 +9,29 @@ const FeedbackList = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    setIsLoading(true);
+    const fetchFeedbackItems = async () => {
+      setIsLoading(true);
 
-    // fetch data from API server - interact with system outside of React
-    fetch(
-      "https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks",
-    )
-      .then((response) => {
+      try {
+        const response = await fetch(
+          "https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks",
+        );
+
         if (!response.ok) {
           throw new Error("Something went wrong");
         }
 
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data.feedbacks);
+        const data = await response.json();
         setFeedbackItems(data.feedbacks);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setErrorMessage("Something went wrong");
-        setIsLoading(false);
-      });
+      } catch (error) {
+        console.log(error);
+        setErrorMessage("Something went wrong. Please try again");
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchFeedbackItems();
   }, []);
 
   return (
