@@ -14,7 +14,14 @@ const FeedbackForm = () => {
         id="feedback-textarea"
         placeholder="feedback"
         spellCheck={false}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          const newText = e.target.value;
+          // basic validation to ensure text does not go over limit
+          if (newText.length > MAX_CHARACTERS) {
+            return;
+          }
+          setText(newText);
+        }}
         maxLength={MAX_CHARACTERS}
       />
       <label htmlFor="feedback-textarea">
