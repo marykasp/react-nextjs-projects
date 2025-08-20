@@ -7,6 +7,16 @@ const FeedbackForm = () => {
   // get number of characters left if limit is 150
   const charCount = MAX_CHARACTERS - text.length;
 
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newText = event.target.value;
+
+    if (newText.length > MAX_CHARACTERS) {
+      return;
+    }
+
+    setText(newText);
+  };
+
   return (
     <form className="form">
       <textarea
@@ -14,14 +24,7 @@ const FeedbackForm = () => {
         id="feedback-textarea"
         placeholder="feedback"
         spellCheck={false}
-        onChange={(e) => {
-          const newText = e.target.value;
-          // basic validation to ensure text does not go over limit
-          if (newText.length > MAX_CHARACTERS) {
-            return;
-          }
-          setText(newText);
-        }}
+        onChange={handleChange}
         maxLength={MAX_CHARACTERS}
       />
       <label htmlFor="feedback-textarea">
