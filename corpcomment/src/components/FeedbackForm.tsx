@@ -4,7 +4,12 @@ const FeedbackForm = () => {
       <label htmlFor="feedback-textarea">
         Enter your feedback here, remember to #hashtag the company
       </label>
-      <textarea name="" id="feedback-textarea" placeholder="feedback" />
+      <textarea
+        name=""
+        id="feedback-textarea"
+        placeholder="feedback"
+        spellCheck={false}
+      />
 
       <div>
         <p className="u-italic">150</p>
