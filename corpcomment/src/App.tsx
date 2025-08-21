@@ -8,11 +8,14 @@ function App() {
   const [feedbackItems, setFeedbackItems] = useState<TFeedbackItem[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [selectedCompany, setSelectedCompany] = useState("ByteGrad");
+  const [selectedCompany, setSelectedCompany] = useState("");
 
-  const filteredFeedbackItems = feedbackItems.filter(
-    (feedbackItem) => feedbackItem.company === selectedCompany,
-  );
+  // only filter feedbackItems if there is a selectedCompany
+  const filteredFeedbackItems = selectedCompany
+    ? feedbackItems.filter(
+        (feedbackItem) => feedbackItem.company === selectedCompany,
+      )
+    : feedbackItems;
 
   const companyList = feedbackItems
     .map((item) => item.company)
