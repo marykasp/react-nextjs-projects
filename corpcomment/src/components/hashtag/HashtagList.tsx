@@ -1,3 +1,5 @@
+import HashTagItem from "./HashTagItem";
+
 type HashTagProps = {
   companyList: string[];
 };
@@ -6,9 +8,7 @@ const HashtagList = ({ companyList }: HashTagProps) => {
   return (
     <ul className="hashtags">
       {companyList.map((company) => (
-        <li>
-          <button>#{company}</button>
-        </li>
+        <HashTagItem company={company} />
       ))}
     </ul>
   );
