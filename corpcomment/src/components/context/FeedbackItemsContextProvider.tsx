@@ -23,7 +23,8 @@ export const FeedbackItemsContext = createContext<TFeedbackItemsContext | null>(
 const FeedbackItemsContextProvider = ({
   children,
 }: FeedbackItemsContextProviderProps) => {
-  const { feedbackItems, isLoading, errorMessage } = useFeedbackItems();
+  const { feedbackItems, isLoading, errorMessage, setFeedbackItems } =
+    useFeedbackItems();
   const [selectedCompany, setSelectedCompany] = useState("");
 
   // only filter feedbackItems if there is a selectedCompany
