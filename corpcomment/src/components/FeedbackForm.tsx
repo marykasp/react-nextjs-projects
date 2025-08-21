@@ -26,6 +26,8 @@ const FeedbackForm = ({ onAddToList }: FeedbackFormProps) => {
 
     // add new text item to list after validation
     onAddToList(text);
+
+    setText("");
   };
 
   return (

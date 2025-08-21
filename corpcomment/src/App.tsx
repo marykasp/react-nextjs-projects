@@ -9,7 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleAddToList = (text: string) => {
+  const handleAddToList = async (text: string) => {
     // validation of user input will occur before being passed to this f(x) to add object to the list
     const companyName = text
       .split(" ")
@@ -27,6 +27,19 @@ function App() {
 
     //add new item to end of list
     setFeedbackItems([...feedbackItems, newItem]);
+
+    // submit new item to the backend server
+    await fetch(
+      "https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks",
+      {
+        method: "POST",
+        body: JSON.stringify(newItem),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      },
+    );
   };
 
   useEffect(() => {
