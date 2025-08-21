@@ -1,7 +1,7 @@
 import Footer from "./components/layout/Footer";
 import Container from "./components/layout/Container";
 import HashtagList from "./components/hashtag/HashtagList";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { TFeedbackItem } from "./lib/type";
 
 function App() {
@@ -11,17 +11,25 @@ function App() {
   const [selectedCompany, setSelectedCompany] = useState("");
 
   // only filter feedbackItems if there is a selectedCompany
-  const filteredFeedbackItems = selectedCompany
-    ? feedbackItems.filter(
-        (feedbackItem) => feedbackItem.company === selectedCompany,
-      )
-    : feedbackItems;
+  const filteredFeedbackItems = useMemo(
+    () =>
+      selectedCompany
+        ? feedbackItems.filter(
+            (feedbackItem) => feedbackItem.company === selectedCompany,
+          )
+        : feedbackItems,
+    [feedbackItems, selectedCompany],
+  );
 
-  const companyList = feedbackItems
-    .map((item) => item.company)
-    .filter((company, index, array) => {
-      return array.indexOf(company) === index;
-    });
+  const companyList = useMemo(
+    () =>
+      feedbackItems
+        .map((item) => item.company)
+        .filter((company, index, array) => {
+          return array.indexOf(company) === index;
+        }),
+    [feedbackItems],
+  );
 
   const handleSelectCompany = (company: string) => {
     setSelectedCompany(company);
