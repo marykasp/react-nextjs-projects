@@ -23,6 +23,10 @@ function App() {
       return array.indexOf(company) === index;
     });
 
+  const handleSelectCompany = (company: string) => {
+    setSelectedCompany(company);
+  };
+
   const handleAddToList = async (text: string) => {
     // validation of user input will occur before being passed to this f(x) to add object to the list
     const companyName = text
@@ -93,7 +97,10 @@ function App() {
         handleAddToList={handleAddToList}
       />
 
-      <HashtagList companyList={companyList} />
+      <HashtagList
+        companyList={companyList}
+        handleSelectCompany={handleSelectCompany}
+      />
     </div>
   );
 }
