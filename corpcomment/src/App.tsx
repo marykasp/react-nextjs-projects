@@ -8,6 +8,11 @@ function App() {
   const [feedbackItems, setFeedbackItems] = useState<TFeedbackItem[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [selectedCompany, setSelectedCompany] = useState("ByteGrad");
+
+  const filteredFeedbackItems = feedbackItems.filter(
+    (feedbackItem) => feedbackItem.company === selectedCompany,
+  );
 
   const companyList = feedbackItems
     .map((item) => item.company)
@@ -79,7 +84,7 @@ function App() {
       <Footer />
 
       <Container
-        feedbackItems={feedbackItems}
+        feedbackItems={filteredFeedbackItems}
         isLoading={isLoading}
         errorMessage={errorMessage}
         handleAddToList={handleAddToList}
