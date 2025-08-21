@@ -17,6 +17,7 @@ const FeedbackList = () => {
       .substring(1);
 
     const newItem: TFeedbackItem = {
+      id: new Date().getTime(),
       text: text,
       upvoteCount: 0,
       daysAgo: 0,
