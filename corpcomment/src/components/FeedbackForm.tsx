@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MAX_CHARACTERS } from "../lib/constants";
+// import { type FeedbackItem } from "../lib/type";
 
 const FeedbackForm = () => {
   const [text, setText] = useState("");
