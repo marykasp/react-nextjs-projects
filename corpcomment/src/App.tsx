@@ -9,6 +9,12 @@ function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const companyList = feedbackItems
+    .map((item) => item.company)
+    .filter((company, index, array) => {
+      return array.indexOf(company) === index;
+    });
+
   const handleAddToList = async (text: string) => {
     // validation of user input will occur before being passed to this f(x) to add object to the list
     const companyName = text
@@ -79,7 +85,7 @@ function App() {
         handleAddToList={handleAddToList}
       />
 
-      <HashtagList />
+      <HashtagList companyList={companyList} />
     </div>
   );
 }
