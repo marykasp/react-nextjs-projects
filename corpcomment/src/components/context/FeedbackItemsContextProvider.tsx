@@ -1,5 +1,9 @@
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { TFeedbackItem } from "../../lib/type";
+
+type FeedbackItemsContextProviderProps = {
+  children: React.ReactNode;
+};
 
 type TFeedbackItemsContext = {
   feedbackItems: TFeedbackItem[];
@@ -7,15 +11,30 @@ type TFeedbackItemsContext = {
   errorMessage: string;
   companyList: string[];
   handleAddToList: (text: string) => void;
+  handleSelectCompany: (text: string) => void;
 };
 
 // union type since context will be null inside the Provider component
 const FeedbackItemsContext = createContext<TFeedbackItemsContext | null>(null);
 
-const FeedbackItemsContextProvider = () => {
+const FeedbackItemsContextProvider = ({
+  children,
+}: FeedbackItemsContextProviderProps) => {
   const [feedbackItems, setFeedbackItems] = useState<TFeedbackItem[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [selectedCompany, setSelectedCompany] = useState("");
+
+  // only filter feedbackItems if there is a selectedCompany
+  const filteredFeedbackItems = useMemo(
+    () =>
+      selectedCompany
+        ? feedbackItems.filter(
+            (feedbackItem) => feedbackItem.company === selectedCompany,
+          )
+        : feedbackItems,
+    [feedbackItems, selectedCompany],
+  );
 
   const companyList = useMemo(
     () =>
@@ -26,6 +45,10 @@ const FeedbackItemsContextProvider = () => {
         }),
     [feedbackItems],
   );
+
+  const handleSelectCompany = (company: string) => {
+    setSelectedCompany(company);
+  };
 
   const handleAddToList = async (text: string) => {
     // validation of user input will occur before being passed to this f(x) to add object to the list
@@ -94,9 +117,22 @@ const FeedbackItemsContextProvider = () => {
         errorMessage,
         companyList,
         handleAddToList,
+        handleSelectCompany,
       }}
-    ></FeedbackItemsContext.Provider>
+    >
+      {children}
+    </FeedbackItemsContext.Provider>
   );
 };
 
 export default FeedbackItemsContextProvider;
+
+// custom hook
+export function useFeedbackItemsContext() {
+  const context = useContext(FeedbackItemsContext);
+  if (!context) {
+    throw new Error("FeedbackItemsContext is not defined");
+  }
+
+  return context;
+}

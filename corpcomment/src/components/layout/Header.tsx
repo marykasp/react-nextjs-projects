@@ -2,11 +2,7 @@ import FeedbackForm from "../feedback/FeedbackForm";
 import Logo from "../Logo";
 import Pattern from "../Pattern";
 
-type HeaderProps = {
-  handleAddToList: (text: string) => void;
-};
-
-const Header = ({ handleAddToList }: HeaderProps) => {
+const Header = () => {
   return (
     <header>
       <Pattern />
@@ -14,7 +10,7 @@ const Header = ({ handleAddToList }: HeaderProps) => {
       <h1>
         Give Feedback. <span>Publicly.</span>
       </h1>
-      <FeedbackForm onAddToList={handleAddToList} />
+      <FeedbackForm />
     </header>
   );
 };

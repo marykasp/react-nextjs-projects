@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { MAX_CHARACTERS } from "../../lib/constants";
+import { useFeedbackItemsContext } from "../context/FeedbackItemsContextProvider";
 
-type FeedbackFormProps = {
-  onAddToList: (text: string) => void;
-};
-
-const FeedbackForm = ({ onAddToList }: FeedbackFormProps) => {
+const FeedbackForm = () => {
   const [text, setText] = useState("");
   const [showValidIndicator, setShowValidIndicator] = useState(false);
   const [showInvalidIndicator, setShowInvalidIndicator] = useState(false);
+
+  const { handleAddToList } = useFeedbackItemsContext();
 
   // get number of characters left if limit is 150
   const charCount = MAX_CHARACTERS - text.length;
@@ -44,7 +43,8 @@ const FeedbackForm = ({ onAddToList }: FeedbackFormProps) => {
     }
 
     // add new text item to list after validation, new feedback item object will be created and added to server
-    onAddToList(text);
+    handleAddToList(text);
+    // onAddToList(text);
 
     setText("");
   };
