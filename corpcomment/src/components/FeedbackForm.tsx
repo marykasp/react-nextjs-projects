@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { MAX_CHARACTERS } from "../lib/constants";
-// import { type FeedbackItem } from "../lib/type";
 
-const FeedbackForm = () => {
+type FeedbackFormProps = {
+  onAddToList: (text: string) => void;
+};
+
+const FeedbackForm = ({ onAddToList }: FeedbackFormProps) => {
   const [text, setText] = useState("");
 
   // get number of characters left if limit is 150
@@ -18,8 +21,15 @@ const FeedbackForm = () => {
     setText(newText);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // add new text item to list after validation
+    onAddToList(text);
+  };
+
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
       <textarea
         value={text}
         id="feedback-textarea"
