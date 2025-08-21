@@ -10,7 +10,6 @@ function App() {
 
       <FeedbackItemsContextProvider>
         <Container />
-
         <HashtagList />
       </FeedbackItemsContextProvider>
     </div>

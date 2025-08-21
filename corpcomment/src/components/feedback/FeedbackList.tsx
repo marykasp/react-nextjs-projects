@@ -6,14 +6,14 @@ import { useFeedbackItemsContext } from "../../lib/hooks";
 const FeedbackList = () => {
   const context = useFeedbackItemsContext();
 
-  const { isLoading, errorMessage, feedbackItems } = context;
+  const { isLoading, errorMessage, filteredFeedbackItems } = context;
 
   return (
     <ol className="feedback-list">
       {isLoading && <Spinner />}
 
       {errorMessage && <ErrorMessage message={errorMessage} />}
-      {feedbackItems.map((feedbackItem) => (
+      {filteredFeedbackItems.map((feedbackItem) => (
         <FeedbackItem feedbackItem={feedbackItem} key={feedbackItem.id} />
       ))}
     </ol>

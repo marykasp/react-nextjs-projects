@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import type { TFeedbackItem } from "../../lib/type";
 
 type FeedbackItemsContextProviderProps = {
@@ -6,7 +6,7 @@ type FeedbackItemsContextProviderProps = {
 };
 
 type TFeedbackItemsContext = {
-  feedbackItems: TFeedbackItem[];
+  filteredFeedbackItems: TFeedbackItem[];
   isLoading: boolean;
   errorMessage: string;
   companyList: string[];
@@ -114,7 +114,7 @@ const FeedbackItemsContextProvider = ({
   return (
     <FeedbackItemsContext.Provider
       value={{
-        feedbackItems,
+        filteredFeedbackItems,
         isLoading,
         errorMessage,
         companyList,
