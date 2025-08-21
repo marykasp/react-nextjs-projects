@@ -7,6 +7,8 @@ type FeedbackFormProps = {
 
 const FeedbackForm = ({ onAddToList }: FeedbackFormProps) => {
   const [text, setText] = useState("");
+  const [showValidIndicator, setShowValidIndicator] = useState(false);
+  const [showInvalidIndicator, setShowInvalidIndicator] = useState(false);
 
   // get number of characters left if limit is 150
   const charCount = MAX_CHARACTERS - text.length;
@@ -24,14 +26,36 @@ const FeedbackForm = ({ onAddToList }: FeedbackFormProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // add new text item to list after validation
+    if (text.includes("#") && text.length >= 5) {
+      // add styling to text area
+      setShowValidIndicator(true);
+      setTimeout(() => {
+        setShowValidIndicator(false);
+      }, 2000);
+    } else {
+      // display error message if user forgot hashtag
+      setShowInvalidIndicator(true);
+
+      setTimeout(() => {
+        setShowInvalidIndicator(false);
+      }, 2000);
+
+      return;
+    }
+
+    // add new text item to list after validation, new feedback item object will be created and added to server
     onAddToList(text);
 
     setText("");
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form
+      className={`form ${showValidIndicator ? "form--valid" : ""} ${
+        showInvalidIndicator ? "form--invalid" : ""
+      }`}
+      onSubmit={handleSubmit}
+    >
       <textarea
         value={text}
         id="feedback-textarea"
