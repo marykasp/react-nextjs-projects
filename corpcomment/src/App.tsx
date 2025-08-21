@@ -10,9 +10,9 @@ function App() {
 
       <FeedbackItemsContextProvider>
         <Container />
-      </FeedbackItemsContextProvider>
 
-      <HashtagList />
+        <HashtagList />
+      </FeedbackItemsContextProvider>
     </div>
   );
 }

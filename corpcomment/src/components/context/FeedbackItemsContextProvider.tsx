@@ -15,7 +15,9 @@ type TFeedbackItemsContext = {
 };
 
 // union type since context will be null inside the Provider component
-const FeedbackItemsContext = createContext<TFeedbackItemsContext | null>(null);
+export const FeedbackItemsContext = createContext<TFeedbackItemsContext | null>(
+  null,
+);
 
 const FeedbackItemsContextProvider = ({
   children,
@@ -126,13 +128,3 @@ const FeedbackItemsContextProvider = ({
 };
 
 export default FeedbackItemsContextProvider;
-
-// custom hook
-export function useFeedbackItemsContext() {
-  const context = useContext(FeedbackItemsContext);
-  if (!context) {
-    throw new Error("FeedbackItemsContext is not defined");
-  }
-
-  return context;
-}

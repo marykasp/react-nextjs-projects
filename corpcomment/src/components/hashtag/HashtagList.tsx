@@ -1,5 +1,5 @@
 import HashTagItem from "./HashTagItem";
-import { useFeedbackItemsContext } from "../context/FeedbackItemsContextProvider";
+import { useFeedbackItemsContext } from "../../lib/hooks";
 
 const HashtagList = () => {
   const { companyList, handleSelectCompany } = useFeedbackItemsContext();
