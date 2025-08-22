@@ -1,8 +1,13 @@
 import BookmarksButton from "./BookmarksButton";
 import Logo from "./Logo";
 import SearchForm from "./SearchForm";
+import { type JobItem } from "../lib/types";
 
-export default function Header() {
+type HeaderProps = {
+  setJobList: (jobs: JobItem[]) => void;
+};
+
+export default function Header({ setJobList }: HeaderProps) {
   return (
     <header className="header">
       <div className="header__top">
@@ -10,7 +15,7 @@ export default function Header() {
         <BookmarksButton />
       </div>
 
-      <SearchForm />
+      <SearchForm onSetJobList={setJobList} />
     </header>
   );
 }

@@ -1,11 +1,10 @@
-import JobItemContent from "./JobItemContent";
-import Sidebar from "./Sidebar";
+// import JobItemContent from "./JobItemContent";
+// import Sidebar from "./Sidebar";
 
-export default function Container() {
-  return (
-    <div className="container">
-      <Sidebar />
-      <JobItemContent />
-    </div>
-  );
+type ContainerProps = {
+  children: React.ReactNode;
+};
+
+export default function Container({ children }: ContainerProps) {
+  return <div className="container">{children}</div>;
 }
