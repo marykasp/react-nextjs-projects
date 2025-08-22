@@ -1,21 +1,7 @@
-import BookmarksButton from "./BookmarksButton";
-import Logo from "./Logo";
-import SearchForm from "./SearchForm";
-import { type JobItem } from "../lib/types";
-
 type HeaderProps = {
-  setJobList: (jobs: JobItem[]) => void;
+  children: React.ReactNode;
 };
 
-export default function Header({ setJobList }: HeaderProps) {
-  return (
-    <header className="header">
-      <div className="header__top">
-        <Logo />
-        <BookmarksButton />
-      </div>
-
-      <SearchForm onSetJobList={setJobList} />
-    </header>
-  );
+export default function Header({ children }: HeaderProps) {
+  return <header className="header">{children}</header>;
 }

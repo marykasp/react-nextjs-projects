@@ -1,31 +1,12 @@
-import { useEffect, useState } from "react";
-import { type JobItem } from "../lib/types";
-
-// {"id":345634575475476,"title":"Node.js Software Engineer","badgeLetters":"PT","company":"PredICT","relevanceScore":1999,"daysAgo":4}
-
-type SearchFormType = {
-  onSetJobList: (jobs: JobItem[]) => void;
+type SearchFormProps = {
+  searchQuery: string;
+  setSearchQuery: (text: string) => void;
 };
 
-export default function SearchForm({ onSetJobList }: SearchFormType) {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(() => {
-    if (!searchQuery) return;
-
-    // fetch data with searchQuery
-    fetch(
-      `https://bytegrad.com/course-assets/projects/rmtdev/api/data?search=${searchQuery}`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.jobItems);
-
-        // set job list to state
-        onSetJobList(data.jobItems);
-      });
-  }, [searchQuery]);
-
+export default function SearchForm({
+  searchQuery,
+  setSearchQuery,
+}: SearchFormProps) {
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };

@@ -1,21 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Background from "./Background";
 import Container from "./Container";
 import Footer from "./Footer";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import JobItemContent from "./JobItemContent";
+import BookmarksButton from "./BookmarksButton";
+import Logo from "./Logo";
+import SearchForm from "./SearchForm";
 import { JobItem } from "../lib/types";
 
 function App() {
   // const [isLoading, setIsLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [jobList, setJobList] = useState<JobItem[] | null>([]);
+
+  useEffect(() => {
+    if (!searchQuery) return;
+
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://bytegrad.com/course-assets/projects/rmtdev/api/data?search=${searchQuery}`,
+      );
+      const data = await response.json();
+
+      setJobList(data.jobItems);
+    };
+
+    fetchData();
+  }, [searchQuery]);
 
   return (
     <>
       <Background />
 
-      <Header setJobList={setJobList} />
+      <Header>
+        <div className="header__top">
+          <Logo />
+          <BookmarksButton />
+        </div>
+
+        <SearchForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      </Header>
 
       <Container>
         <Sidebar jobList={jobList} />
