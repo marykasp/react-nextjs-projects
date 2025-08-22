@@ -1,23 +1,11 @@
-import { JobItem } from "../lib/types";
-import JobList from "./JobList";
-import Pagination from "./PaginationControls";
-import ResultsCount from "./ResultsCount";
-import SortingControls from "./SortingControls";
-
 type SidebarProps = {
-  jobList: JobItem[];
+  children: React.ReactNode;
 };
 
-export default function Sidebar({ jobList }: SidebarProps) {
-  return (
-    <div className="sidebar">
-      <div className="sidebar__top">
-        <ResultsCount />
-        <SortingControls />
-      </div>
+export default function Sidebar({ children }: SidebarProps) {
+  return <div className="sidebar">{children}</div>;
+}
 
-      <JobList jobList={jobList} />
-      <Pagination />
-    </div>
-  );
+export function SidebarTop({ children }: SidebarProps) {
+  return <div className="sidebar__top">{children}</div>;
 }

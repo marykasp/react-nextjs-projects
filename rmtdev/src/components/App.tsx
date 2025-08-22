@@ -3,12 +3,16 @@ import Background from "./Background";
 import Container from "./Container";
 import Footer from "./Footer";
 import Header from "./Header";
-import Sidebar from "./Sidebar";
+import Sidebar, { SidebarTop } from "./Sidebar";
 import JobItemContent from "./JobItemContent";
 import BookmarksButton from "./BookmarksButton";
 import Logo from "./Logo";
 import SearchForm from "./SearchForm";
 import { JobItem } from "../lib/types";
+import ResultsCount from "./ResultsCount";
+import SortingControls from "./SortingControls";
+import JobList from "./JobList";
+import Pagination from "./PaginationControls";
 
 function App() {
   // const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +48,16 @@ function App() {
       </Header>
 
       <Container>
-        <Sidebar jobList={jobList} />
+        <Sidebar>
+          <SidebarTop>
+            <ResultsCount />
+            <SortingControls />
+          </SidebarTop>
+
+          <JobList jobList={jobList} />
+          <Pagination />
+        </Sidebar>
+
         <JobItemContent />
       </Container>
 
