@@ -9,31 +9,29 @@ import Logo from "./Logo";
 import SearchForm from "./SearchForm";
 import JobList from "./JobList";
 import Pagination from "./PaginationControls";
-import { useJobItems } from "../lib/hooks";
+import { useActiveId, useJobItems } from "../lib/hooks";
 import { useEffect, useState } from "react";
+import { ActiveJobItem } from "../lib/types";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeId, setActiveId] = useState<number | null>(null);
-
   const { isLoading, jobItemsSliced } = useJobItems(searchQuery);
+  const activeId = useActiveId();
 
-  // use activeID to fetch that specific job
-  // read the job ID from the url with window event listener
+  const [activeJob, setActiveJob] = useState<ActiveJobItem | null>(null);
+
+  // useID to fetch specific game
   useEffect(() => {
-    const handleHashChange = () => {
-      console.log(window.location.hash.slice(1));
-      const id = +window.location.hash.slice(1);
-      setActiveId(id);
-    };
-
-    handleHashChange();
-    window.addEventListener("hashchange", handleHashChange);
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, []);
+    if (!activeId) return;
+    fetch(
+      `https://bytegrad.com/course-assets/projects/rmtdev/api/data/${activeId}`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.jobItem);
+        setActiveJob(data.jobItem);
+      });
+  }, [activeId]);
 
   return (
     <>
@@ -54,7 +52,7 @@ function App() {
           <Pagination />
         </Sidebar>
 
-        <JobItemContent />
+        <JobItemContent activeJob={activeJob} />
       </Container>
 
       <Footer />

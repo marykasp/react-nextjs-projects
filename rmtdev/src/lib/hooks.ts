@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { JobItem } from "./types";
 
+// fetches list of jobs from server using the searchQuery
 export function useJobItems(searchQuery: string) {
   const [isLoading, setIsLoading] = useState(false);
   const [jobItems, setJobItems] = useState<JobItem[]>([]);
@@ -31,4 +32,26 @@ export function useJobItems(searchQuery: string) {
   }, [searchQuery]);
 
   return { isLoading, jobItems, jobItemsSliced };
+}
+
+// reads the job ID from the URL
+export function useActiveId() {
+  const [activeId, setActiveId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      console.log(window.location.hash.slice(1));
+      const id = +window.location.hash.slice(1);
+      setActiveId(id);
+    };
+
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
+  return activeId;
 }
