@@ -1,6 +1,3 @@
-// import JobItemContent from "./JobItemContent";
-// import Sidebar from "./Sidebar";
-
 type ContainerProps = {
   children: React.ReactNode;
 };

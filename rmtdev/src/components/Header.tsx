@@ -1,7 +1,3 @@
-type HeaderProps = {
-  children: React.ReactNode;
-};
-
-export default function Header({ children }: HeaderProps) {
+export default function Header({ children }: { children: React.ReactNode }) {
   return <header className="header">{children}</header>;
 }

@@ -14,8 +14,11 @@ import { useState } from "react";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
+  // const [activeId, setActiveId] = useState(0);
 
   const { isLoading, jobItemsSliced } = useJobItems(searchQuery);
+
+  // use activeID to fetch that specific job
 
   return (
     <>
