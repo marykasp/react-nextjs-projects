@@ -10,7 +10,7 @@ import SearchForm from "./SearchForm";
 import JobList from "./JobList";
 import Pagination from "./PaginationControls";
 import { useJobItems } from "../lib/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,6 +19,19 @@ function App() {
   const { isLoading, jobItemsSliced } = useJobItems(searchQuery);
 
   // use activeID to fetch that specific job
+  // read the job ID from the url with window event listener
+  useEffect(() => {
+    const handleHashChange = () => {
+      console.log(window.location.hash.slice(1));
+    };
+
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
 
   return (
     <>
