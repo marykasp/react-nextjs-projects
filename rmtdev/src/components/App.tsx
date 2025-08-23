@@ -9,29 +9,16 @@ import Logo from "./Logo";
 import SearchForm from "./SearchForm";
 import JobList from "./JobList";
 import Pagination from "./PaginationControls";
-import { useActiveId, useJobItems } from "../lib/hooks";
-import { useEffect, useState } from "react";
-import { ActiveJobItem } from "../lib/types";
+import { useActiveId, useActiveJobItem, useJobItems } from "../lib/hooks";
+import { useState } from "react";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const { isLoading, jobItemsSliced } = useJobItems(searchQuery);
+  // reads the job ID from the URL
   const activeId = useActiveId();
-
-  const [activeJob, setActiveJob] = useState<ActiveJobItem | null>(null);
-
-  // useID to fetch specific game
-  useEffect(() => {
-    if (!activeId) return;
-    fetch(
-      `https://bytegrad.com/course-assets/projects/rmtdev/api/data/${activeId}`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.jobItem);
-        setActiveJob(data.jobItem);
-      });
-  }, [activeId]);
+  // uses job ID to fetch job from DB
+  const activeJob = useActiveJobItem(activeId);
 
   return (
     <>

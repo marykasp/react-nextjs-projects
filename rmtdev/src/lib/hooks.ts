@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { JobItem } from "./types";
+import { ActiveJobItem, JobItem } from "./types";
 
 // fetches list of jobs from server using the searchQuery
 export function useJobItems(searchQuery: string) {
@@ -54,4 +54,22 @@ export function useActiveId() {
   }, []);
 
   return activeId;
+}
+
+export function useActiveJobItem(id: number | null) {
+  const [activeJob, setActiveJob] = useState<ActiveJobItem | null>(null);
+
+  // useID to fetch specific game
+  useEffect(() => {
+    if (!id) return;
+
+    fetch(`https://bytegrad.com/course-assets/projects/rmtdev/api/data/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.jobItem);
+        setActiveJob(data.jobItem);
+      });
+  }, [id]);
+
+  return activeJob;
 }
