@@ -7,19 +7,13 @@ export type JobItem = {
   daysAgo: number;
 };
 
-export type ActiveJobItem = {
-  badgeLetters: string;
-  company: string;
+export type ActiveJobItem = JobItem & {
   companyURL: string;
-  companyImgURL: string;
-  daysAgo: number;
+  coverImgURL: string;
   description: string;
   duration: string;
-  id: number;
   location: string;
   qualifications: string[];
-  relevanceScore: number;
   reviews: string[];
   salary: string;
-  title: string;
 };

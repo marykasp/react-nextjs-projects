@@ -12,7 +12,7 @@ export default function JobItemContent({
   return (
     <section className="job-details">
       <div>
-        <img src={activeJob.companyImgURL} alt="#" />
+        <img src={activeJob.coverImgURL} alt="#" />
 
         <a className="apply-btn" href={activeJob.companyURL} target="_blank">
           Apply
