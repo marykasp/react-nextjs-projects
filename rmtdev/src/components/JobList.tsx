@@ -3,20 +3,17 @@ import JobListItem from "./JobListItem";
 import Spinner from "./Spinner";
 
 type JobListProps = {
-  jobList: JobItem[] | null;
+  jobItems: JobItem[] | undefined;
   isLoading: boolean;
 };
 
-export default function JobList({ jobList, isLoading }: JobListProps) {
-  // slice job items to only return 10 jobs
-  const shortJobList = jobList?.slice(0, 7);
-
+export default function JobList({ jobItems, isLoading }: JobListProps) {
   return (
     <ul className="job-list">
       {isLoading && <Spinner />}
 
-      {shortJobList
-        ? shortJobList.map((job) => <JobListItem job={job} key={job.id} />)
+      {jobItems
+        ? jobItems.map((job) => <JobListItem job={job} key={job.id} />)
         : null}
     </ul>
   );
