@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  // const [activeId, setActiveId] = useState(0);
+  const [activeId, setActiveId] = useState<number | null>(null);
 
   const { isLoading, jobItemsSliced } = useJobItems(searchQuery);
 
@@ -23,6 +23,8 @@ function App() {
   useEffect(() => {
     const handleHashChange = () => {
       console.log(window.location.hash.slice(1));
+      const id = +window.location.hash.slice(1);
+      setActiveId(id);
     };
 
     handleHashChange();
