@@ -3,7 +3,7 @@ import JobListItem from "./JobListItem";
 import Spinner from "./Spinner";
 
 type JobListProps = {
-  jobItems: JobItem[] | undefined;
+  jobItems: JobItem[];
   isLoading: boolean;
 };
 

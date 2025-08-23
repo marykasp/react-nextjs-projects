@@ -3,10 +3,10 @@ import { JobItem } from "./types";
 
 export function useJobItems(searchQuery: string) {
   const [isLoading, setIsLoading] = useState(false);
-  const [jobList, setJobList] = useState<JobItem[] | null>([]);
+  const [jobItems, setJobItems] = useState<JobItem[]>([]);
 
   // slice job items to only return 10 jobs
-  const jobItemsSliced = jobList?.slice(0, 7);
+  const jobItemsSliced = jobItems.slice(0, 7);
 
   useEffect(() => {
     if (!searchQuery) return;
@@ -21,7 +21,7 @@ export function useJobItems(searchQuery: string) {
         const data = await response.json();
 
         setIsLoading(false);
-        setJobList(data.jobItems);
+        setJobItems(data.jobItems);
       } catch (error) {
         console.log(error);
       }
@@ -30,5 +30,5 @@ export function useJobItems(searchQuery: string) {
     fetchData();
   }, [searchQuery]);
 
-  return { isLoading, jobList, jobItemsSliced };
+  return { isLoading, jobItems, jobItemsSliced };
 }
