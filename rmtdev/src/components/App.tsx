@@ -14,7 +14,8 @@ import { useState } from "react";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { isLoading, jobItemsSliced } = useJobItems(searchQuery);
+  const { isLoading, jobItemsSliced, totalJobs } = useJobItems(searchQuery);
+
   // reads the job ID from the URL
   const activeId = useActiveId();
   // uses job ID to fetch job from DB
@@ -34,7 +35,7 @@ function App() {
       </Header>
 
       <Container>
-        <Sidebar>
+        <Sidebar totalNumberOfJobs={totalJobs}>
           <JobList jobItems={jobItemsSliced} isLoading={isLoading} />
           <Pagination />
         </Sidebar>

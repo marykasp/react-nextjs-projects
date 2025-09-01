@@ -3,13 +3,14 @@ import SortingControls from "./SortingControls";
 
 type SidebarProps = {
   children: React.ReactNode;
+  totalNumberOfJobs: number;
 };
 
-export default function Sidebar({ children }: SidebarProps) {
+export default function Sidebar({ children, totalNumberOfJobs }: SidebarProps) {
   return (
     <div className="sidebar">
       <div className="sidebar__top">
-        <ResultsCount />
+        <ResultsCount totalNumberOfJobs={totalNumberOfJobs} />
         <SortingControls />
       </div>
       {children}

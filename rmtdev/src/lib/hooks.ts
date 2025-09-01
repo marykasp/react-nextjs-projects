@@ -8,6 +8,8 @@ export function useJobItems(searchQuery: string) {
 
   // slice job items to only return 10 jobs
   const jobItemsSliced = jobItems.slice(0, 7);
+  // number of jobs returned
+  const totalJobs = jobItems.length;
 
   useEffect(() => {
     if (!searchQuery) return;
@@ -31,7 +33,7 @@ export function useJobItems(searchQuery: string) {
     fetchData();
   }, [searchQuery]);
 
-  return { isLoading, jobItems, jobItemsSliced };
+  return { isLoading, jobItems, jobItemsSliced, totalJobs };
 }
 
 // reads the job ID from the URL
