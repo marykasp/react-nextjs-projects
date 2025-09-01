@@ -2,13 +2,31 @@
 
 import { BookmarkIcon } from "@radix-ui/react-icons";
 import { ActiveJobItem } from "../lib/types";
+import Spinner from "./Spinner";
+
+type JobItemContentProps = {
+  activeJob: ActiveJobItem | null;
+  isLoading: boolean;
+};
 
 export default function JobItemContent({
   activeJob,
-}: {
-  activeJob: ActiveJobItem | null;
-}) {
+  isLoading,
+}: JobItemContentProps) {
+  console.log(isLoading);
+  // show a loading spinner if data is still being fetched
+  if (isLoading) {
+    return (
+      <section className="job-details">
+        <div>
+          <Spinner />
+        </div>
+      </section>
+    );
+  }
+  // if not activeJob returned just show template content
   if (!activeJob) return <EmptyJobContent />;
+
   return (
     <section className="job-details">
       <div>

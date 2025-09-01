@@ -18,7 +18,7 @@ function App() {
   // reads the job ID from the URL
   const activeId = useActiveId();
   // uses job ID to fetch job from DB
-  const { activeJob, isLoading } = useActiveJobItem(activeId);
+  const { activeJob, dataLoading } = useActiveJobItem(activeId);
 
   return (
     <>
@@ -39,7 +39,7 @@ function App() {
           <Pagination />
         </Sidebar>
 
-        <JobItemContent activeJob={activeJob} />
+        <JobItemContent activeJob={activeJob} isLoading={dataLoading} />
       </Container>
 
       <Footer />
