@@ -18,7 +18,7 @@ function App() {
   // reads the job ID from the URL
   const activeId = useActiveId();
   // uses job ID to fetch job from DB
-  const activeJob = useActiveJobItem(activeId);
+  const { activeJob, isLoading } = useActiveJobItem(activeId);
 
   return (
     <>

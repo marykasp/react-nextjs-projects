@@ -58,18 +58,25 @@ export function useActiveId() {
 
 export function useActiveJobItem(id: number | null) {
   const [activeJob, setActiveJob] = useState<ActiveJobItem | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // useID to fetch specific game
   useEffect(() => {
     if (!id) return;
 
-    fetch(`https://bytegrad.com/course-assets/projects/rmtdev/api/data/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.jobItem);
-        setActiveJob(data.jobItem);
-      });
+    const fetchActiveJob = async () => {
+      setIsLoading(true);
+      const response = await fetch(
+        `https://bytegrad.com/course-assets/projects/rmtdev/api/data/${id}`,
+      );
+      const data = await response.json();
+
+      setActiveJob(data.jobItem);
+    };
+
+    setIsLoading(false);
+    fetchActiveJob();
   }, [id]);
 
-  return activeJob;
+  return { activeJob, isLoading };
 }
