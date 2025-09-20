@@ -84,13 +84,15 @@ export function useActiveJobItem(id: number | null) {
   return { activeJob, dataLoading };
 }
 
+// ------------------------------------------------------
+
 export function useDebounce<T>(value: T, delay = 500): T {
-  const [debouncedValue, setDebouncedValue] = useState<T>("");
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
     const timerId = setTimeout(() => setDebouncedValue(value), delay);
 
-    () => clearInterval(timerId);
+    return () => clearTimeout(timerId);
   }, [value, delay]);
 
   return debouncedValue;
