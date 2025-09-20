@@ -9,12 +9,18 @@ import Logo from "./Logo";
 import SearchForm from "./SearchForm";
 import JobList from "./JobList";
 import Pagination from "./PaginationControls";
-import { useActiveId, useActiveJobItem, useJobItems } from "../lib/hooks";
+import {
+  useActiveId,
+  useActiveJobItem,
+  useDebounce,
+  useJobItems,
+} from "../lib/hooks";
 import { useState } from "react";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { isLoading, jobItemsSliced, totalJobs } = useJobItems(searchQuery);
+  const debouncedValue = useDebounce(searchQuery, 350);
+  const { isLoading, jobItemsSliced, totalJobs } = useJobItems(debouncedValue);
 
   // reads the job ID from the URL
   const activeId = useActiveId();
