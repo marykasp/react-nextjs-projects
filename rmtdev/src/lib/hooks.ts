@@ -3,6 +3,33 @@ import { useQuery } from "@tanstack/react-query";
 // import { BASE_API_URL } from "./constants";
 import { JobItem } from "./types";
 
+const fetchJobItem = async (id: number) => {
+  const response = await fetch(
+    `https://bytegrad.com/course-assets/projects/rmtdev/api/data/${id}`,
+  );
+  const data = await response.json();
+  return data;
+};
+
+// ------------------------------------------------------
+export function useActiveJobItem(id: number | null) {
+  const { data, isLoading } = useQuery(
+    ["job-item", id], // query keys
+    () => (id ? fetchJobItem(id) : null),
+    {
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      retry: false,
+      enabled: Boolean(id),
+      onError: () => {},
+    },
+  );
+
+  const activeJob = data?.jobItem;
+  const dataLoading = isLoading;
+  return { activeJob, dataLoading };
+}
+
 // fetches list of jobs from server using the searchQuery
 export function useJobItems(searchQuery: string) {
   const [isLoading, setIsLoading] = useState(false);
@@ -59,60 +86,6 @@ export function useActiveId() {
   }, []);
 
   return activeId;
-}
-
-// ------------------------------------------------------
-// fetches specific job item using job item ID
-// export function useActiveJobItem(id: number | null) {
-//   const [activeJob, setActiveJob] = useState<ActiveJobItem | null>(null);
-//   const [dataLoading, setDataLoading] = useState(false);
-
-//   // useID to fetch specific game
-//   useEffect(() => {
-//     if (!id) return;
-
-//     const fetchActiveJob = async () => {
-//       setDataLoading(true);
-//       const response = await fetch(
-//         `https://bytegrad.com/course-assets/projects/rmtdev/api/data/${id}`,
-//       );
-//       const data = await response.json();
-
-//       setDataLoading(false);
-//       console.log(data.jobItem);
-//       setActiveJob(data.jobItem);
-//     };
-
-//     fetchActiveJob();
-//   }, [id]);
-
-//   return { activeJob, dataLoading };
-// }
-
-export function useActiveJobItem(id: number | null) {
-  // return job item and loading state
-  const { data, isLoading } = useQuery(
-    ["job-item", id], // query keys
-    async () => {
-      // fetch data
-      const response = await fetch(
-        `https://bytegrad.com/course-assets/projects/rmtdev/api/data/${id}`,
-      );
-      const data = await response.json();
-      return data;
-    },
-    {
-      staleTime: 1000 * 60 * 5,
-      refetchOnWindowFocus: false,
-      retry: false,
-      enabled: Boolean(id),
-      onError: () => {},
-    },
-  );
-
-  const activeJob = data?.jobItem;
-  const dataLoading = isLoading;
-  return { activeJob, dataLoading };
 }
 
 // ------------------------------------------------------
