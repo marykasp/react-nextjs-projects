@@ -5,7 +5,7 @@ import { ActiveJobItem } from "../lib/types";
 import Spinner from "./Spinner";
 
 type JobItemContentProps = {
-  activeJob: ActiveJobItem | null;
+  activeJob: ActiveJobItem | undefined;
   isLoading: boolean;
 };
 

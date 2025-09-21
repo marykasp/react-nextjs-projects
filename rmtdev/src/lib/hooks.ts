@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 // import { BASE_API_URL } from "./constants";
-import { JobItem } from "./types";
+import { ActiveJobItem, JobItem } from "./types";
 
-const fetchJobItem = async (id: number) => {
+type JobItemApiResponse = {
+  public: boolean;
+  jobItem: ActiveJobItem;
+};
+
+const fetchJobItem = async (id: number): Promise<JobItemApiResponse> => {
   const response = await fetch(
     `https://bytegrad.com/course-assets/projects/rmtdev/api/data/${id}`,
   );
