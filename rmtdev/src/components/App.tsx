@@ -20,7 +20,10 @@ import { useState } from "react";
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedValue = useDebounce(searchQuery, 350);
-  const { isLoading, jobItemsSliced, totalJobs } = useJobItems(debouncedValue);
+  const { jobItems, isLoading } = useJobItems(debouncedValue);
+
+  const totalJobs = jobItems.length;
+  const jobItemsSliced = jobItems.slice(0, 7);
 
   // reads the job ID from the URL
   const activeId = useActiveId();

@@ -46,11 +46,6 @@ export function useJobItems(searchQuery: string) {
   const [isLoading, setIsLoading] = useState(false);
   const [jobItems, setJobItems] = useState<JobItem[]>([]);
 
-  // slice job items to only return 10 jobs
-  const jobItemsSliced = jobItems.slice(0, 7);
-  // number of jobs returned
-  const totalJobs = jobItems.length;
-
   useEffect(() => {
     if (!searchQuery) return;
 
@@ -73,7 +68,7 @@ export function useJobItems(searchQuery: string) {
     fetchData();
   }, [searchQuery]);
 
-  return { isLoading, jobItems, jobItemsSliced, totalJobs };
+  return { isLoading, jobItems };
 }
 
 // -----------------------------------------------
