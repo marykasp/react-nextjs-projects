@@ -12,6 +12,10 @@ const fetchJobItem = async (id: number): Promise<JobItemApiResponse> => {
   const response = await fetch(
     `https://bytegrad.com/course-assets/projects/rmtdev/api/data/${id}`,
   );
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.description);
+  }
   const data = await response.json();
   return data;
 };
@@ -26,7 +30,9 @@ export function useActiveJobItem(id: number | null) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: Boolean(id),
-      onError: () => {},
+      onError: (error) => {
+        console.log(error);
+      },
     },
   );
 
