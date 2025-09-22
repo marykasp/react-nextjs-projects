@@ -8,6 +8,12 @@ type JobItemApiResponse = {
   jobItem: ActiveJobItem;
 };
 
+type JobItemsApiResponse = {
+  public: boolean;
+  sorted: boolean;
+  jobItems: JobItem[];
+};
+
 const fetchJobItem = async (id: number): Promise<JobItemApiResponse> => {
   const response = await fetch(
     `https://bytegrad.com/course-assets/projects/rmtdev/api/data/${id}`,
@@ -16,6 +22,16 @@ const fetchJobItem = async (id: number): Promise<JobItemApiResponse> => {
     const errorData = await response.json();
     throw new Error(errorData.description);
   }
+  const data = await response.json();
+  return data;
+};
+
+const fetchJobItems = async (
+  searchText: string,
+): Promise<JobItemsApiResponse> => {
+  const response = await fetch(
+    `https://bytegrad.com/course-assets/projects/rmtdev/api/data?search=${searchText}`,
+  );
   const data = await response.json();
   return data;
 };
@@ -41,35 +57,55 @@ export function useActiveJobItem(id: number | null) {
   return { activeJob, dataLoading };
 }
 
-// fetches list of jobs from server using the searchQuery
 export function useJobItems(searchQuery: string) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [jobItems, setJobItems] = useState<JobItem[]>([]);
-
-  useEffect(() => {
-    if (!searchQuery) return;
-
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      try {
-        const response = await fetch(
-          `https://bytegrad.com/course-assets/projects/rmtdev/api/data?search=${searchQuery}`,
-        );
-        const data = await response.json();
-
-        setIsLoading(false);
-        setJobItems(data.jobItems);
-      } catch (error) {
+  const { data, isInitialLoading } = useQuery(
+    ["job-items", searchQuery],
+    () => (searchQuery ? fetchJobItems(searchQuery) : null),
+    {
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      retry: false,
+      onError: (error) => {
         console.log(error);
-      }
-    };
+      },
+    },
+  );
 
-    fetchData();
-  }, [searchQuery]);
+  const jobItems = data?.jobItems;
+  const isLoading = isInitialLoading;
 
-  return { isLoading, jobItems };
+  return { jobItems, isLoading };
 }
+
+// fetches list of jobs from server using the searchQuery
+// export function useJobItems(searchQuery: string) {
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [jobItems, setJobItems] = useState<JobItem[]>([]);
+
+//   useEffect(() => {
+//     if (!searchQuery) return;
+
+//     const fetchData = async () => {
+//       setIsLoading(true);
+
+//       try {
+//         const response = await fetch(
+//           `https://bytegrad.com/course-assets/projects/rmtdev/api/data?search=${searchQuery}`,
+//         );
+//         const data = await response.json();
+
+//         setIsLoading(false);
+//         setJobItems(data.jobItems);
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     };
+
+//     fetchData();
+//   }, [searchQuery]);
+
+//   return { isLoading, jobItems };
+// }
 
 // -----------------------------------------------
 // reads the job ID from the URL

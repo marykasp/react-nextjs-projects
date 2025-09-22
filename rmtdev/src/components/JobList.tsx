@@ -4,7 +4,7 @@ import JobListItem from "./JobListItem";
 import { useActiveId } from "../lib/hooks";
 
 type JobListProps = {
-  jobItems: JobItem[];
+  jobItems: JobItem[] | undefined;
   isLoading: boolean;
 };
 
