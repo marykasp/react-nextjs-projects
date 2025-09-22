@@ -71,41 +71,11 @@ export function useJobItems(searchQuery: string) {
     },
   );
 
-  const jobItems = data?.jobItems;
-  const isLoading = isInitialLoading;
-
-  return { jobItems, isLoading };
+  return {
+    jobItems: data?.jobItems,
+    isLoading: isInitialLoading,
+  } as const;
 }
-
-// fetches list of jobs from server using the searchQuery
-// export function useJobItems(searchQuery: string) {
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [jobItems, setJobItems] = useState<JobItem[]>([]);
-
-//   useEffect(() => {
-//     if (!searchQuery) return;
-
-//     const fetchData = async () => {
-//       setIsLoading(true);
-
-//       try {
-//         const response = await fetch(
-//           `https://bytegrad.com/course-assets/projects/rmtdev/api/data?search=${searchQuery}`,
-//         );
-//         const data = await response.json();
-
-//         setIsLoading(false);
-//         setJobItems(data.jobItems);
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-
-//     fetchData();
-//   }, [searchQuery]);
-
-//   return { isLoading, jobItems };
-// }
 
 // -----------------------------------------------
 // reads the job ID from the URL
