@@ -74,6 +74,7 @@ export function useJobItems(searchQuery: string) {
       retry: false,
       onError: (error) => {
         console.log(error);
+        alert(error);
       },
     },
   );
