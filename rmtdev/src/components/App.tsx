@@ -23,7 +23,7 @@ function App() {
   const { jobItems, isLoading } = useJobItems(debouncedValue);
 
   const totalJobs = jobItems?.length || 0;
-  const jobItemsSliced = jobItems?.slice(0, 7);
+  const jobItemsSliced = jobItems?.slice(0, 7) || [];
 
   // reads the job ID from the URL
   const activeId = useActiveId();

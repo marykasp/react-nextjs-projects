@@ -14,6 +14,7 @@ type JobItemsApiResponse = {
   jobItems: JobItem[];
 };
 
+// fetch specific job item based on ID
 const fetchJobItem = async (id: number): Promise<JobItemApiResponse> => {
   const response = await fetch(
     `https://bytegrad.com/course-assets/projects/rmtdev/api/data/${id}`,
@@ -26,12 +27,18 @@ const fetchJobItem = async (id: number): Promise<JobItemApiResponse> => {
   return data;
 };
 
+// fetch job items based on search query
 const fetchJobItems = async (
   searchText: string,
 ): Promise<JobItemsApiResponse> => {
   const response = await fetch(
     `https://bytegrad.com/course-assets/projects/rmtdev/api/data?search=${searchText}`,
   );
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.description);
+  }
   const data = await response.json();
   return data;
 };

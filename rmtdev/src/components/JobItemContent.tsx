@@ -13,7 +13,7 @@ export default function JobItemContent({
   activeJob,
   isLoading,
 }: JobItemContentProps) {
-  console.log(isLoading);
+  // console.log(isLoading);
   // show a loading spinner if data is still being fetched
   if (isLoading) {
     return (
