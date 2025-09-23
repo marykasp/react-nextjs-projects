@@ -16,6 +16,7 @@ import {
   useJobItems,
 } from "../lib/hooks";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -53,6 +54,8 @@ function App() {
       </Container>
 
       <Footer />
+
+      <Toaster position="top-right" />
     </>
   );
 }

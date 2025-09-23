@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 // import { BASE_API_URL } from "./constants";
 import { ActiveJobItem, JobItem } from "./types";
+import toast from "react-hot-toast";
 
 type JobItemApiResponse = {
   public: boolean;
@@ -73,8 +74,7 @@ export function useJobItems(searchQuery: string) {
       refetchOnWindowFocus: false,
       retry: false,
       onError: (error) => {
-        console.log(error);
-        alert(error);
+        toast.error(error.message);
       },
     },
   );
